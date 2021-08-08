@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+## Weather Application
+Weather Web Application Built With React JS using open weather API
+It Has Following Features
+- Search tity
+- Show Full date
+- Show temperature
+- Dynamic background according to weather
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
