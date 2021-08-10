@@ -4,17 +4,22 @@
     box-sizing: border-box;
   }
 
-.App {
+.app {
     text-align: center;
-    background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.2),
-            rgba(0, 0, 0, 0.75)
-        ),
-        url(./images/cold-bg.jpg);
+    background-image: url(./images/cold-bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    transition: 1s ease-in-out;
+}
+
+.app.warm {
+    background-image: url(./images/warm-bg.jpg);
+    transition: 1s ease-in-out;
+}
+
+.container {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
     min-height: 100vh;
     padding: 25px;
 }
@@ -94,6 +99,14 @@
     font-size: 48px;
     font-weight: 700;
     text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.feel {
+    font-weight: 500;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 10px;
+    text-shadow: none;
 }
 
 @media (max-width: 575px)
