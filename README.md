@@ -1,9 +1,10 @@
 ## Weather Application
 Weather Web Application Built With React JS using open weather API
 It Has Following Features
-- Search tity
+- Search City
 - Show Full date
 - Show temperature
+- Show Feels Like
 - Dynamic background according to weather
 
 ## Getting Started with Create React App
