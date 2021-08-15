@@ -15,8 +15,6 @@ function App() {
         fetch(`${api.base}weather?q=karachi&units=metric&appid=${api.key}`)
         .then(res => res.json())
         .then(data => setWeather(data))
-        console.log(weather)
-        console.log(weather.name)
     }, [])
 
     const handleSearch = (e) => {
@@ -43,10 +41,25 @@ function App() {
         return `${day} ${date} ${month} ${year}`
     }
 
-    setTimeout(function() {
-        console.log(weather)
-        console.log(weather.name)
-    }, 1000)
+    const getBackground = () => {
+        if (weather.main.temp > 37) {
+            return 'app hot'
+        }
+        else if (weather.main.temp > 30) {
+            return 'app warm'
+        }
+        else if (weather.main.temp > 16) {
+            return 'app clear'
+        }
+        else {
+            return 'app cold'
+        }
+    }
+
+    // setTimeout(function() {
+    //     console.log(weather)
+    //     console.log(weather.name)
+    // }, 1000)
     
 
     // function func() {
@@ -55,7 +68,7 @@ function App() {
     
     
     return (
-        <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 30) ? 'app warm' : 'app') : 'app'}>
+        <div className={(typeof weather.main != "undefined") ? getBackground() : 'app'}>
             <div className="container">
                 <div className="search-box">
                 <input 
@@ -67,7 +80,7 @@ function App() {
                     onKeyPress={handleSearch}
                 />
                 </div>
-                {typeof weather.main !== 'undefined' &&
+                {typeof weather.main !== 'undefined' ?
                     <div>
                         <div className="location-box">
                             <div className="location">{weather.name}, {weather.sys.country}</div>
@@ -81,6 +94,11 @@ function App() {
                                 </div>
                             </div>
                             <div className="weather">{weather.weather[0].main}</div>
+                        </div>
+                    </div> :
+                    <div>
+                        <div className="location-box">
+                            <div className="location">Incorrect City Name</div>
                         </div>
                     </div>
                 }
