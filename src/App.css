@@ -13,8 +13,23 @@
     transition: 1s ease-in-out;
 }
 
+.app.hot {
+    background-image: url(./images/hot-bg.jpg);
+    transition: 1s ease-in-out;
+}
+
 .app.warm {
     background-image: url(./images/warm-bg.jpg);
+    transition: 1s ease-in-out;
+}
+
+.app.clear {
+    background-image: url(./images/clear-bg.jpg);
+    transition: 1s ease-in-out;
+}
+
+.app.cold {
+    background-image: url(./images/cold-bg.jpg);
     transition: 1s ease-in-out;
 }
 
