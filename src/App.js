@@ -10,11 +10,15 @@ function App() {
 
     const [query, setQuery] = useState('')
     const [weather, setWeather] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         fetch(`${api.base}weather?q=karachi&units=metric&appid=${api.key}`)
         .then(res => res.json())
-        .then(data => setWeather(data))
+        .then(data => {
+            setWeather(data)
+            setIsLoading(false)
+        })
     }, [])
 
     const handleSearch = (e) => {
@@ -55,17 +59,6 @@ function App() {
             return 'app cold'
         }
     }
-
-    // setTimeout(function() {
-    //     console.log(weather)
-    //     console.log(weather.name)
-    // }, 1000)
-    
-
-    // function func() {
-    //     console.log(weather.main.temp);
-    // }
-    
     
     return (
         <div className={(typeof weather.main != "undefined") ? getBackground() : 'app'}>
@@ -98,7 +91,8 @@ function App() {
                     </div> :
                     <div>
                         <div className="location-box">
-                            <div className="location">Incorrect City Name</div>
+                            {isLoading && <div className="location">Loading...</div> }
+                            {!isLoading && <div className="location">Incorrect City Name</div> }
                         </div>
                     </div>
                 }
