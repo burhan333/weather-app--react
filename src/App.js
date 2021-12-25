@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import Loader from './components/loader';
 import './App.css';
 
 const api = {
@@ -17,8 +18,11 @@ function App() {
         .then(res => res.json())
         .then(data => {
             setWeather(data)
-            setIsLoading(false)
         })
+
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
     }, [])
 
     const handleSearch = (e) => {
@@ -61,43 +65,47 @@ function App() {
     }
     
     return (
-        <div className={(typeof weather.main != "undefined") ? getBackground() : 'app'}>
-            <div className="container">
-                <div className="search-box">
-                <input 
-                    type="text"
-                    className="search-bar"
-                    placeholder="Search..."
-                    onChange={e => setQuery(e.target.value)}
-                    value={query}
-                    onKeyPress={handleSearch}
-                />
-                </div>
-                {typeof weather.main !== 'undefined' ?
-                    <div>
-                        <div className="location-box">
-                            <div className="location">{weather.name}, {weather.sys.country}</div>
-                            <div className="date">{handleDate()}</div>
-                        </div>
-                        <div className="weather-box">
-                            <div className="temp">
-                                {Math.round(weather.main.temp)}°C
-                                <div className="feel">
-                                    Feels Like {Math.round(weather.main.feels_like)}°
-                                </div>
-                            </div>
-                            <div className="weather">{weather.weather[0].main}</div>
-                        </div>
-                    </div> :
-                    <div>
-                        <div className="location-box">
-                            {isLoading && <div className="location">Loading...</div> }
-                            {!isLoading && <div className="location">Incorrect City Name</div> }
-                        </div>
+        <React.Fragment>
+            {isLoading && <Loader/>}
+            <div className={(typeof weather.main != "undefined") ? getBackground() : 'app'}>
+                <div className="container">
+                    <div className="search-box">
+                    <input 
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search..."
+                        onChange={e => setQuery(e.target.value)}
+                        value={query}
+                        onKeyPress={handleSearch}
+                    />
                     </div>
-                }
+                    {typeof weather.main !== 'undefined' ?
+                        <div>
+                            <div className="location-box">
+                                <div className="location">{weather.name}, {weather.sys.country}</div>
+                                <div className="date">{handleDate()}</div>
+                            </div>
+                            <div className="weather-box">
+                                <div className="temp">
+                                    {Math.round(weather.main.temp)}°C
+                                    <div className="feel">
+                                        Feels Like {Math.round(weather.main.feels_like)}°
+                                    </div>
+                                </div>
+                                <div className="weather">{weather.weather[0].main}</div>
+                            </div>
+                        </div> :
+                        <div>
+                            <div className="location-box">
+                                {/* {isLoading && <div className="location">Loading...</div> }
+                                {!isLoading &&  } */}
+                                <div className="location">Incorrect City Name</div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+        </React.Fragment>
     );
 }
 
